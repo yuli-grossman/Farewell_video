@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grossmans Farewell</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      background: #7a9478;
+      background-image:
+        radial-gradient(ellipse at 20% 10%, rgba(180,210,185,0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 90%, rgba(90,120,88,0.45) 0%, transparent 50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 16px 12px 24px;
+      font-family: 'Lato', sans-serif;
+    }
+
+    /* Subtle noise overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          92deg,
+          transparent,
+          transparent 3px,
+          rgba(50,70,50,0.04) 3px,
+          rgba(50,70,50,0.04) 6px
+        );
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      background: #f0ddb5;
+      background-image:
+        radial-gradient(ellipse at 28% 14%, rgba(255,248,220,0.7) 0%, transparent 55%),
+        radial-gradient(ellipse at 72% 82%, rgba(210,170,90,0.2) 0%, transparent 50%),
+        repeating-linear-gradient(
+          91deg,
+          transparent,
+          transparent 6px,
+          rgba(160,100,20,0.035) 6px,
+          rgba(160,100,20,0.035) 12px
+        );
+      border-radius: 24px;
+      box-shadow:
+        0 8px 40px rgba(40,70,40,0.35),
+        inset 0 1px 0 rgba(255,248,210,0.8),
+        inset 0 -2px 0 rgba(100,60,0,0.15);
+      max-width: 1060px;
+      width: 100%;
+      padding: 44px 48px 44px;
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+    }
+
+    /* ── LEFT: Israel coastline illustration ── */
+    .map-col {
+      flex: 0 0 300px;
+    }
+
+    .map-wrapper {
+      width: 100%;
+      position: relative;
+      aspect-ratio: 1417 / 2048;
+      mix-blend-mode: multiply;
+    }
+
+    .map-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .map-img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 1;
+      display: block;
+    }
+
+    /* ── RIGHT: content ── */
+    .content-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .heart-top {
+      font-size: 22px;
+      color: #6a3500;
+      text-align: center;
+    }
+
+    .title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #3d1a00;
+      letter-spacing: 0.03em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .message {
+      text-align: center;
+      line-height: 1.8;
+      color: #4a2200;
+    }
+
+    .message .line2 {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.3rem;
+    }
+
+    /* ── Video ── */
+    .video-wrap {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #a8c8dc;
+      box-shadow: 0 4px 16px rgba(40,70,40,0.2);
+    }
+
+    .video-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    .video-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: #2a5068;
+      font-size: 0.88rem;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .video-placeholder svg { opacity: 0.5; }
+
+    /* ── Photos ── */
+    .photos-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #6a3500;
+      text-align: center;
+    }
+
+    .photos-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.9fr;
+      grid-template-rows: auto auto auto;
+      gap: 10px;
+    }
+
+    .photo-slot {
+      border-radius: 9px;
+      overflow: hidden;
+      background: #a8c8dc;
+      box-shadow: 0 3px 12px rgba(40,70,40,0.18);
+      border: 2px solid rgba(255,248,220,0.6);
+      position: relative;
+    }
+
+    /* Varied aspect ratios for each slot */
+    .photo-slot:nth-child(1) { aspect-ratio: 4/3; }
+    .photo-slot:nth-child(2) { aspect-ratio: 3/4; grid-row: span 2; }
+    .photo-slot:nth-child(3) { aspect-ratio: 3/2; }
+    .photo-slot:nth-child(4) { aspect-ratio: 16/9; grid-column: span 2; }
+    .photo-slot:nth-child(5) { aspect-ratio: 4/3; grid-column: span 2; }
+
+    .photo-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-slot .placeholder-inner {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      color: #2a5068;
+      text-align: center;
+      padding: 8px;
+      font-style: italic;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      position: relative;
+      z-index: 1;
+      margin-top: 16px;
+      font-size: 0.72rem;
+      color: rgba(220,255,220,0.5);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .card {
+        flex-direction: column;
+        padding: 28px 20px 28px;
+        gap: 20px;
+      }
+      .map-col {
+        flex: none;
+        width: 100%;
+        flex-direction: row;
+        justify-content: center;
+      }
+      .map-col { flex: 0 0 auto; width: 55%; margin: 0 auto; }
+      .title { font-size: 1.25rem; }
+      .photos-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .photo-slot:nth-child(2) { grid-row: auto; aspect-ratio: 4/3; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- LEFT: Israel coastline -->
+  <div class="map-col">
+    <div class="map-wrapper">
+      <svg class="map-overlay" viewBox="0 0 1417 2048" xmlns="http://www.w3.org/2000/svg">
+        <!-- HEART — red, left of coast between Tel Aviv and Jaffa -->
+        <path d="M 505 1228 C 505 1212, 476 1198, 476 1220 C 476 1244, 505 1268, 505 1268
+                 C 505 1268, 534 1244, 534 1220 C 534 1198, 505 1212, 505 1228 Z"
+              fill="#FF2222"/>
+      </svg>
+      <img class="map-img" src="TLV.png" alt="Israel coastline illustration" />
+    </div>
+  </div>
+
+  <!-- RIGHT: content -->
+  <div class="content-col">
+
+    <div class="heart-top">♡</div>
+
+    <div class="title">Good luck Shai and Marie!</div>
+
+    <div class="message">
+      <div class="line2">We love you and miss you already ❤️</div>
+    </div>
+
+    <!-- VIDEO -->
+    <div class="video-wrap" id="video-container">
+      <!-- Replace this placeholder with your YouTube embed once you have the link:
+           <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe>
+      -->
+      <div class="video-placeholder">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <circle cx="24" cy="24" r="22" stroke="#2a5068" stroke-width="2"/>
+          <polygon points="19,14 38,24 19,34" fill="#2a5068"/>
+        </svg>
+        <span>Video coming soon</span>
+      </div>
+    </div>
+
+    <!-- PHOTOS -->
+    <div class="photos-label">Family Moments</div>
+
+    <div class="photos-grid">
+      <!-- Replace placeholder divs with: <img src="your-photo.jpg" alt="" /> -->
+      <div class="photo-slot"><div class="placeholder-inner">Photo 1</div></div>
+      <div class="photo-slot"><div class="placeholder-inner">Photo 2</div></div>
+      <div class="photo-slot"><div class="placeholder-inner">Photo 3</div></div>
+      <div class="photo-slot"><div class="placeholder-inner">Photo 4</div></div>
+      <div class="photo-slot"><div class="placeholder-inner">Photo 5</div></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer">made with love ♡</div>
+
+</body>
+</html>
