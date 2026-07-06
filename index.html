@@ -193,6 +193,8 @@
 
     .photo-slot.big { grid-column: span 2; }
     .photo-slot.tall { grid-row: span 2; }
+    .photo-slot.stretch { align-self: stretch; }
+    .photo-slot.stretch img { height: 100%; object-fit: cover; }
 
     .photo-slot img {
       width: 100%;
@@ -302,14 +304,14 @@
       <!-- 4 people — full width -->
       <div class="photo-slot big"><img src="1212b602-8227-4576-97e9-ba6ba8eb7c22.JPG" alt="" /></div>
       <!-- masks family spans 2 rows; zoo selfie + kids-at-window stack on the right -->
-      <div class="photo-slot tall"><img src="bc1b1e71-4260-40ef-b42d-de03bbba13a3.JPG" alt="" /></div>
+      <div class="photo-slot tall" style="align-self:center"><img src="bc1b1e71-4260-40ef-b42d-de03bbba13a3.JPG" alt="" /></div>
       <div class="photo-slot"><img src="64859c9c-78f3-4441-8bb5-ad29c24085e1.JPG" alt="" /></div>
       <div class="photo-slot"><img src="adc14773-045f-41fa-9c1e-66ac79ce6f0a.JPG" alt="" /></div>
       <!-- 4 people — full width -->
       <div class="photo-slot big"><img src="3f18a0bf-5fd9-4ddb-927a-87c6e8812af4.JPG" alt="" /></div>
       <!-- 3 people each — side by side -->
-      <div class="photo-slot"><img src="bfc7f659-d47e-4163-a884-408f90b0f046.JPG" alt="" /></div>
-      <div class="photo-slot"><img src="IMG_9482.jpg" alt="" /></div>
+      <div class="photo-slot stretch"><img src="bfc7f659-d47e-4163-a884-408f90b0f046.JPG" alt="" /></div>
+      <div class="photo-slot stretch"><img src="IMG_9482.jpg" alt="" /></div>
       <!-- 3 people each — side by side -->
       <div class="photo-slot"><img src="f4f4da8a-41f3-44bb-8054-eff8ae8cfbd0.JPG" alt="" /></div>
       <div class="photo-slot"><img src="73bc7d3d-49ff-42df-8704-ac538c8e655d.JPG" alt="" /></div>
