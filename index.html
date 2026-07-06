@@ -177,9 +177,9 @@
 
     .photos-grid {
       display: grid;
-      grid-template-columns: 1.2fr 0.9fr;
-      grid-template-rows: auto auto auto;
+      grid-template-columns: 1fr 1fr;
       gap: 10px;
+      align-items: start;
     }
 
     .photo-slot {
@@ -191,17 +191,11 @@
       position: relative;
     }
 
-    /* Varied aspect ratios for each slot */
-    .photo-slot:nth-child(1) { aspect-ratio: 4/3; }
-    .photo-slot:nth-child(2) { aspect-ratio: 3/4; grid-row: span 2; }
-    .photo-slot:nth-child(3) { aspect-ratio: 3/2; }
-    .photo-slot:nth-child(4) { aspect-ratio: 16/9; grid-column: span 2; }
-    .photo-slot:nth-child(5) { aspect-ratio: 4/3; grid-column: span 2; }
+    .photo-slot.big { grid-column: span 2; }
 
     .photo-slot img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
       display: block;
     }
 
@@ -298,12 +292,27 @@
     <div class="photos-label">Family Moments</div>
 
     <div class="photos-grid">
-      <!-- Replace placeholder divs with: <img src="your-photo.jpg" alt="" /> -->
-      <div class="photo-slot"><div class="placeholder-inner">Photo 1</div></div>
-      <div class="photo-slot"><div class="placeholder-inner">Photo 2</div></div>
-      <div class="photo-slot"><div class="placeholder-inner">Photo 3</div></div>
-      <div class="photo-slot"><div class="placeholder-inner">Photo 4</div></div>
-      <div class="photo-slot"><div class="placeholder-inner">Photo 5</div></div>
+      <!-- 9 people — biggest, full width -->
+      <div class="photo-slot big"><img src="market_cropped.jpg" alt="" /></div>
+      <!-- 6 people — full width -->
+      <div class="photo-slot big"><img src="36fb92a3-63bc-4793-9904-b05b4b9eb2f9.JPG" alt="" /></div>
+      <!-- 4 people — full width scenic -->
+      <div class="photo-slot big"><img src="f9e17e31-2640-447c-a566-71725fb18604.JPG" alt="" /></div>
+      <!-- 4 people — full width -->
+      <div class="photo-slot big"><img src="1212b602-8227-4576-97e9-ba6ba8eb7c22.JPG" alt="" /></div>
+      <!-- 4 people each — side by side -->
+      <div class="photo-slot"><img src="bc1b1e71-4260-40ef-b42d-de03bbba13a3.JPG" alt="" /></div>
+      <div class="photo-slot"><img src="64859c9c-78f3-4441-8bb5-ad29c24085e1.JPG" alt="" /></div>
+      <!-- 4 people — full width -->
+      <div class="photo-slot big"><img src="3f18a0bf-5fd9-4ddb-927a-87c6e8812af4.JPG" alt="" /></div>
+      <!-- 3 people each — side by side -->
+      <div class="photo-slot"><img src="bfc7f659-d47e-4163-a884-408f90b0f046.JPG" alt="" /></div>
+      <div class="photo-slot"><img src="IMG_9482.jpg" alt="" /></div>
+      <!-- 3 people each — side by side -->
+      <div class="photo-slot"><img src="f4f4da8a-41f3-44bb-8054-eff8ae8cfbd0.JPG" alt="" /></div>
+      <div class="photo-slot"><img src="73bc7d3d-49ff-42df-8704-ac538c8e655d.JPG" alt="" /></div>
+      <!-- 1 person — half width -->
+      <div class="photo-slot"><img src="IMG_9484.JPG" alt="" /></div>
     </div>
 
   </div>
